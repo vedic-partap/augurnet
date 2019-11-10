@@ -1,6 +1,6 @@
 import numpy as np 
-from augur.utils import read_file, compare_interval_count
-from augur.plotter import plot_host_events
+from augurnet.utils import read_file, compare_interval_count
+from augurnet.plotter import plot_host_events
 from os import path
 import errno
 import os
@@ -110,8 +110,8 @@ class NTPPData(Dataset):
 
 
 if __name__ == '__main__':
-    events_filename = "augur/data/preprocess/events.txt"
-    times_filename  = "augur/data/preprocess/times.txt"
+    events_filename = "augurnet/data/preprocess/events.txt"
+    times_filename  = "augurnet/data/preprocess/times.txt"
     data = TemporalData(events_filename, times_filename)
     print("Host count",data.get_host_count())
     # print(data.events)

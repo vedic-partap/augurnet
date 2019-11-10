@@ -1,3 +1,3 @@
-Augur: Network Traffic Predictions
+AugurNet: Network Traffic Predictions
 
 Author: Vedic Partap

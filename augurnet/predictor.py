@@ -2,16 +2,16 @@ import argparse, time
 import torch
 import numpy as np
 import random
-from augur.data import NTPPData
-from augur.utils import ensure_dir
-from augur.data import TemporalData ######
-from augur.model import NTPP
-from augur.scorer import discriminatorLoss, calculateLoss
-from augur.plotter import plot, plot_predictions
+from augurnet.data import NTPPData
+from augurnet.utils import ensure_dir
+from augurnet.data import TemporalData ######
+from augurnet.model import NTPP
+from augurnet.scorer import discriminatorLoss, calculateLoss
+from augurnet.plotter import plot, plot_predictions
 
 class Augur:
     args = {
-        'save_dir':'augur/data/saved/',
+        'save_dir':'augurnet/data/saved/',
         'window_size':64,
         'int_count':100,
         'test_size':0.2,
