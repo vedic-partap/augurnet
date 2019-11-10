@@ -1,24 +1,28 @@
 from distutils.core import setup
 setup(
-  name = 'augur',         # How you named your package folder (MyLib)
-  packages = ['augur'],   # Chose the same as "name"
-  version = '0.1',      # Start with a small number and increase it with every change you make
-  license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = 'Network Traffic Predictions',   # Give a short description about your library
-  author = 'Vedic Partap',                   # Type in your name
-  author_email = 'me@vedicpartap.com',      # Type in your E-Mail
-  url = 'https://github.com/vedic-partap/augur',   # Provide either the link to your github or to your website
-  download_url = 'https://github.com/vedic-partap/augur/archive/v_01.tar.gz',    # I explain this later on
-  keywords = ['networ', 'reinforcement-learning', 'predictions', 'generative models'],   # Keywords that define your package best
-  install_requires=[            # I get to this in a second
-         
+  name = 'augur',         
+  packages = ['augur'],   
+  version = '0.1',      
+  license='MIT',        
+  description = 'Network Traffic Predictions. We develop the product with the mindset of ease. The predictions are done by using the temporal history of the events from the multiple host. The model take into account the effect of multiple host (network) on user’s traffic and contention between different hosts.',   
+  author = 'Vedic Partap',                   
+  author_email = 'me@vedicpartap.com',      
+  url = 'https://github.com/vedic-partap/augur',   
+  download_url = 'https://github.com/vedic-partap/augur/archive/v_01.tar.gz',    
+  keywords = ['networ', 'reinforcement-learning', 'predictions', 'generative models'],   
+  install_requires=[            
+        'numpy>=1.17.2,',
+        'torch>=1.3.1',
+        'matplotlib>=3.1.1',
+        'seaborn>=0.9.0',
+        'scikit-learn>=0.21.3'
       ],
   classifiers=[
-    'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
-    'Intended Audience :: Developers',      # Define that your audience are developers
+    'Development Status :: 3 - Alpha',      
+    'Intended Audience :: Developers',      
     'Topic :: Software Development :: Build Tools',
-    'License :: OSI Approved :: MIT License',   # Again, pick a license
-    'Programming Language :: Python :: 3',      #Specify which pyhton versions that you want to support
+    'License :: OSI Approved :: MIT License',   
+    'Programming Language :: Python :: 3',      
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',

@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 import numpy as np
+import subprocess
+from collections import defaultdict
 
 """
 Function to form events.txt and times.txt from .csv input file
@@ -100,3 +102,23 @@ def getMinCount(filename):
     events = read_file(filename)
     min_count = min([len(x) for x in events])
     return min_count
+
+def read_pcap(filename):
+    cmd = f"""tshark -r {filename} -E separator=, -E occurrence=f -E quote=d -o 'gui.column.format:"Time","%t","Source","%s", "Length","%L"'"""
+    res = subprocess.check_output(cmd,shell=True).decode('utf-8')
+    res = res.strip().split("\n")
+    events, times = defaultdict(list),defaultdict(list)
+    for entry in res:
+        print(entry)
+        if len(entry)>0:
+            entry = entry.strip()
+            [time, source, length] = entry.split(" ")
+            events[source].append(int(length))
+            times[source].append(float(time))
+    return (list(events.values())),(list(times.values()))
+    
+if __name__ =="__main__":
+    filename = "augur/data/fuzz-2006-11-24-4742.pcap"
+    print(read_pcap(filename))
+
+    

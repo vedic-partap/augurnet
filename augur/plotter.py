@@ -1,5 +1,8 @@
 import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
 
+sns.set(style="darkgrid")
 """
 Function to plot the loss and MAPE
 
@@ -43,6 +46,29 @@ def plot(train_loss_list, train_mape_t_list, train_mape_n_list, dev_loss_list, d
     plt.close(f2)
     plt.close(f3)
 
+def plot_host_events(events, times):
+    host_cnt = len(events)
+    plt.figure()
+    for i,(event,time) in enumerate(zip(events,times)):
+        plt.subplot(host_cnt,1,i+1)
+        sns.lineplot(time,event)
+        plt.xlabel("Time")
+        plt.ylabel("Length of Packets")
+        plt.title(f"Time series data for Host {i}")
+    plt.show()
+
+def plot_predictions(data):
+    temporal_prediction = np.transpose(data,axes=(1,0))
+    plt.figure()
+    host_cnt = len(temporal_prediction)
+    time_steps = len(temporal_prediction[0])
+    for i,time in enumerate(temporal_prediction):
+        plt.subplot(host_cnt,1,i+1)
+        sns.lineplot(range(time_steps), time,marker='o')
+        plt.xlabel("Time stamp")
+        plt.ylabel("Time of Events")
+        plt.title(f"Time predictions for Host {i}")
+    plt.show()
 
 if __name__ == "__main__":
     x_t = [1,2,3,4]

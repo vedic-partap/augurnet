@@ -7,7 +7,7 @@ from augur.utils import ensure_dir
 from augur.data import TemporalData ######
 from augur.model import NTPP
 from augur.scorer import discriminatorLoss, calculateLoss
-from augur.plotter import plot
+from augur.plotter import plot, plot_predictions
 
 class Augur:
     args = {
@@ -179,6 +179,7 @@ class Augur:
                                 )
         
         self.data.startTrain()
+        self.time_predictions = []
         for run in range(time_step):
             for i, (batch_events,batch_times) in enumerate(train_loader):
                 start_time = time.time()
@@ -198,11 +199,12 @@ class Augur:
                 last_time_step_layer = outputs.clone()
                 last_time_step_layer = (last_time_step_layer.detach().numpy()).transpose()[-1]
                 times = [1/(x+1e-9) for x in last_time_step_layer]
-                print("Last_time_step",times)
+                if verbose: print("Last_time_step",times)
+                self.time_predictions.append(times)
                 self.data.change_data(times)
 
-    def plot(self,*args,**kwrags):
-        pass
+    def plot_next_events(self,*args,**kwrags):
+        plot_predictions(self.time_predictions)
 
 
 if __name__ == "__main__":
@@ -210,10 +212,10 @@ if __name__ == "__main__":
     times_filename  = "augur/data/preprocess/times.txt"
     data = TemporalData(events_filename, times_filename)
     print("Host count",data.get_host_count())
-
+    data.plot_data()
     model = Augur()
     model.fit(data)
     model.plot_losses()
-    model.predict()
-        
+    model.predict(verbose=1)
+    model.plot_next_events()
             

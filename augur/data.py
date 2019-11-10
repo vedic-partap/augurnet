@@ -1,5 +1,6 @@
 import numpy as np 
 from augur.utils import read_file, compare_interval_count
+from augur.plotter import plot_host_events
 from os import path
 import errno
 import os
@@ -28,7 +29,7 @@ class TemporalData:
             return len(self.events)
 
     def plot_data(self):
-        pass
+        plot_host_events(self.events, self.times)
 
     def describe(self):
         pass
